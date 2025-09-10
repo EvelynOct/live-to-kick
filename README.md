@@ -14,6 +14,7 @@ Configure routing in the project to run the main application.
 Create a model in the main application named Product with the mandatory attributes.
 
 Create a function in views.py to be returned to an HTML template that displays the application name, your name, and your class.
+> 
 
 
 Create routing in urls.py of the main application to map the function created in views.py.
@@ -26,6 +27,8 @@ Create a README.md file
 2) Create a diagram showing the client request to the Django-based web application and its response, and explain the relationship between urls.py, views.py, models.py, and the HTML file in the diagram.
 
 This is the diagram (source from the MTV PPT of PDB):
+
+(Im not sure why it's not showing a diagram in previews, but it is a diagram in the editor view).
 > HTTP request --> URLS (urls.py) -- (then it forwards the request to the mentioned view)
 >                                                    |
 >                                                    |
@@ -35,8 +38,17 @@ This is the diagram (source from the MTV PPT of PDB):
 >                                                    |
 >                                                    |
 >                                            Template (filename.html)
+Explanation: 
+urls.py acts like  atraffic controller, so the user accesses the URL they want on their browser, then the Django will map the request to a View via the urls.py to the correct functions or classes in views.py. Then, the view retrieves and process the data from the Model or data structure in models.py. Lastly there is the HTML template (such as filename.html) that is the presentation layer, where user get contexts of the view, and it can use Django template to insert the data to html. 
 
+3) Explain the role of settings.py in a Django project!
 
-test
+settings.py is like the control center for the Django project. It contains all the configurations for the Django project. For example, we can modify the settings.py to use environment var, or to edit the ALLOWED_HOST for development purposes.
+
+4) How does database migration work in Django?
+
+We use 2 commands to run the database migration on Django. The first command to run is "python manage.py makemigrations", this will create migration files that contains model changes that hasn't been applied to the database. Afterwards, we need to apply the migrations to the database by running "python manage.py migrate" which applies the model changes listed in the migration files to the database. So, if we change a model, we need to repeat the 2 migration command.
+
+5) In your opinion, among all existing frameworks, why is the Django framework chosen as the starting point for learning software development?
 
 
