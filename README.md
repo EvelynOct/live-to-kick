@@ -28,7 +28,7 @@ Create a README.md file
 
 This is the diagram (source from the MTV PPT of PDB):
 
-(Im not sure why it's not showing a diagram in previews, but it is a diagram in the editor view).
+Link to gdrive (in case it doesn't show properly): https://drive.google.com/file/d/1G-kt6VAG6eZvukHYEFUtWymNYRYqi8xY/view?usp=sharing 
 > HTTP request --> URLS (urls.py) -- (then it forwards the request to the mentioned view)
 >                                                    |
 >                                                    |
@@ -40,7 +40,8 @@ This is the diagram (source from the MTV PPT of PDB):
 >                                            Template (filename.html)
 
 Explanation: 
-urls.py acts like  atraffic controller, so the user accesses the URL they want on their browser, then the Django will map the request to a View via the urls.py to the correct functions or classes in views.py. Then, the view retrieves and process the data from the Model or data structure in models.py. Lastly there is the HTML template (such as filename.html) that is the presentation layer, where user get contexts of the view, and it can use Django template to insert the data to html. 
+
+urls.py acts like a traffic controller, so the user accesses the URL they want on their browser, then the Django will map the request to a View via the urls.py to the correct functions or classes in views.py. Then, the view retrieves and process the data from the Model or data structure in models.py. Lastly there is the HTML template (such as filename.html) that is the presentation layer, where user get contexts of the view, and it can use Django template to insert the data to html. 
 
 3) Explain the role of settings.py in a Django project!
 
@@ -52,4 +53,8 @@ We use 2 commands to run the database migration on Django. The first command to 
 
 5) In your opinion, among all existing frameworks, why is the Django framework chosen as the starting point for learning software development?
 
+In my opinion, I think the MTV structure from Django is good to learn in software development. Because I think it has a clear separation, which is the Model-Template-View. So the data and the presentation is separated. Other than the MTV structure, I also this that the Django commands are not that complicated, like by using startapp we could start an app already.
 
+6) Do you have any feedback for the teaching assistant for Tutorial 1 that you previously completed?
+
+I think the tutorial 1 is clear. However I did encounter some problem because my phyton file wasn't auto save. So when I forgot to save the file before running the command in command prompt, the command and the next commands that I used becomes an error. 
