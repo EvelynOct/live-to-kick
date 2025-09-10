@@ -25,7 +25,7 @@ Create a README.md file
 
 2) Create a diagram showing the client request to the Django-based web application and its response, and explain the relationship between urls.py, views.py, models.py, and the HTML file in the diagram.
 
-This is the diagram (source from the MTV PPT of PDB) (Also I apologize.. but when edited this shows as a diagram, but at the preview it doesn't look like one..):
+This is the diagram (source from the MTV PPT of PDB):
 > HTTP request --> URLS (urls.py) -- (then it forwards the request to the mentioned view)
 >                                                    |
 >                                                    |
