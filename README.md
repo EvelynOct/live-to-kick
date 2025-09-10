@@ -38,6 +38,7 @@ This is the diagram (source from the MTV PPT of PDB):
 >                                                    |
 >                                                    |
 >                                            Template (filename.html)
+
 Explanation: 
 urls.py acts like  atraffic controller, so the user accesses the URL they want on their browser, then the Django will map the request to a View via the urls.py to the correct functions or classes in views.py. Then, the view retrieves and process the data from the Model or data structure in models.py. Lastly there is the HTML template (such as filename.html) that is the presentation layer, where user get contexts of the view, and it can use Django template to insert the data to html. 
 
