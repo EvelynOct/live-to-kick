@@ -1,4 +1,5 @@
-1) How do I implemented the checklist above step-by-step? \n
+1) How do I implemented the checklist above step-by-step?
+
 Create a new Django project.
 > First of all, I made a new folder in my laptop called live-to-kick (which will be my Django project name). Then, I changed the directory in command prompt to the file I created and use the command "python -m venv env" and then "env\Scripts\activate" to activate the virtual environment. After that, I opened my VSCode, opened the folder live-to-kick there, then I create a new requirements.txt file and add the needed dependencies and install it using the command "pip install -r requirements.txt" so that we can use those dependencies. After that, I just create a django project name live_to_kick by using "django-admin startproject live_to_kick ." command. Then, I make a .env file and ensure that "PRODUCTION=False" is there. Afterwards, create a .env.prod file with the database credentials from my gmail, then replace tutorial with tugas_individu. Then I modify the settings.py file to use the enviroment variable and also add localhost to ALLOWED_HOST and PRODUCTION configuration. After that I only need to try running the server to make sure everything went alright, by doing "python manage.py migrate" then "python manage.py runserver" then opening the link "http://localhost:8000" to see if it works or not.
 
@@ -24,7 +25,7 @@ Create a README.md file
 
 2) Create a diagram showing the client request to the Django-based web application and its response, and explain the relationship between urls.py, views.py, models.py, and the HTML file in the diagram.
 
-This is the diagram (source from the MTV PPT of PDB):
+This is the diagram (source from the MTV PPT of PDB) (Also I apologize.. but when edited this shows as a diagram, but at the preview it doesn't look like one..):
 > HTTP request --> URLS (urls.py) -- (then it forwards the request to the mentioned view)
 >                                                    |
 >                                                    |
