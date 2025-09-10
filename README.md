@@ -9,17 +9,21 @@ Create an application named main within the project.
 > To do this, I ran the command "python manage.py startapp main" on command prompt, then I register the "main" application on the settings.py of the "live_to_kick" project by adding it to INSTALLED_APPS.
 
 Configure routing in the project to run the main application.
+> This is similar to my answer in creating the routing using urls.py. To do this, first I made a urls.py file in the main directory, this will contain the routing configurations. Then we import the path function and the show_main function from main.views so it will be called when it matchs with a URL. 
 
 
 Create a model in the main application named Product with the mandatory attributes.
+> For this, I open the models.py file in the main application directory, then add a class Product(models.Model). Afterwards, I add the mandatory attributes alongside the needed type. Then, to apply the changes made in models.py, we need to run the model migrations using the command "python manage.py makemigrations" and then "python manage.py migrate".
 
 Create a function in views.py to be returned to an HTML template that displays the application name, your name, and your class.
-> 
+> I just edit my views.py that has the data (my app name, my name, and my class), then I return render with the main.html. Then on the main application there's a folder called templates where I will make a file called main.html. It will contains the app title, name, and my class.
 
 
 Create routing in urls.py of the main application to map the function created in views.py.
+> To do this, first I made a urls.py file in the main directory, this will contain the routing configurations. Then we import the path function and the show_main function from main.views so it will be called when it matchs with a URL. We also import the include function from django.urls to import URL route patterns from other application to the urls.py file. 
 
 Deploy the application to PWS so that it can be accessed by your peers via the Internet.
+> To do this, I just log in to the PWS website, then log in using my SSO information. After that, I made a new project called livetokick and copy the credential. Then, I edit the enviroment in the website according to the contents of the .env.prod file. Then in the settings.py I add the PWS deployment URL,then do the usual git add, commit, push. Then build the website using the credentials from earlier. 
 
 Create a README.md file
 > I just make a new file called README.md in my live-to-kick root folder, then I do "git add README.md" command at command prompt, followed by "git commit -m "Answers" as commit. Then I do "git push origin master" and "git push pws master" everytime I edit something in the files I'm using.
