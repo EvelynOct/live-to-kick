@@ -27,8 +27,8 @@ class Product(models.Model):
 
     @property
     def popular_item(self):
-        return self.views > 50
+        return self.product_views > 50
 
     def increment_views(self):
-        self.views += 1
+        self.product_views += 1
         self.save()
