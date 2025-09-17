@@ -97,3 +97,6 @@ e. Create a webpage that displays the details of each model object data.
 
 6.  Do you have any feedback for the teaching assistants for Tutorial 2?
 > I think the many typos made it harder/longer for the debugging kak. But other than that, I think it's good. The TAs is very helpful to help fix the bugs and teach us how to read the bugs :D
+
+7. Access the four URLs in point 2 using Postman, take screenshots of the URL access results in Postman, and add them to your README.md
+> https://drive.google.com/drive/folders/1xcZHH48Btw6ELFNUVkmNJ6viT7iGQvF0?usp=sharing 
