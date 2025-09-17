@@ -16,8 +16,8 @@ class MainTest(TestCase):
 
     def test_product_creation(self):
         product = Product.objects.create(
-          title="BURHAN FC WINS",
-          content="BURHAN FC 1-0 PANDA BC",
+          name="BURHAN FC WINS",
+          description="BURHAN FC 1-0 PANDA BC",
           category="match",
           product_views=1001,
           is_featured=True
@@ -28,8 +28,8 @@ class MainTest(TestCase):
 
     def test_product_default_values(self):
         product = Product.objects.create(
-          title="Test Product",
-          content="Test content"
+          name="Test Product",
+          description="Test Description"
         )
         self.assertEqual(product.category, "update")
         self.assertEqual(product.product_views, 0)
@@ -38,8 +38,8 @@ class MainTest(TestCase):
 
     def test_increment_views(self):
         product = Product.objects.create(
-          title="Test Product",
-          content="Test content"
+          name="Test Product",
+          description="Test Description"
         )
         initial_views = product.product_views
         product.increment_views()
@@ -48,16 +48,16 @@ class MainTest(TestCase):
     def test_is_product_hot_threshold(self):
         # Test product with exactly 20 views (should not be hot)
         product_20 = Product.objects.create(
-          title="Product with 20 views",
-          content="Test content",
+          name="Product with 20 views",
+          description="Test description",
           product_views=20
         )
         self.assertFalse(product_20.is_product_hot)
 
         # Test product with 21 views (should be hot)
         product_21 = Product.objects.create(
-          title="Product with 21 views",
-          content="Test content",
+          name="Product with 21 views",
+          description="Test description",
           product_views=21
         )
         self.assertTrue(product_21.is_product_hot)
