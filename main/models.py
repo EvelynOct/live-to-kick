@@ -14,7 +14,7 @@ class Product(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255) # product name (this was title)
-    price = models.IntegerField() # product price
+    price = models.IntegerField(default=0) # product price
     description = models.TextField() # item description (this was content)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='update') # product category
     thumbnail = models.URLField(blank=True, null=True) # product image
