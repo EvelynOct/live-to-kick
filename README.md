@@ -62,3 +62,38 @@ In my opinion, I think the MTV structure from Django is good to learn in softwar
 6) Do you have any feedback for the teaching assistant for Tutorial 1 that you previously completed?
 
 I think the tutorial 1 is clear. However I did encounter some problem because my phyton file wasn't auto save. So when I forgot to save the file before running the command in command prompt, the command and the next commands that I used becomes an error. 
+
+
+--------------------------------------------------
+Assignment 3:
+1. Why do we need data delivery in implementing a platform?
+> In my opinion, it is important because all platforms needs data to function. Having the right data delivery is important because we need the right data to move between the users and services at the right time. For example, we can use the data delivery to have real time interaction with the user. We can also use our platform to interact with another platform by using API.
+
+2. In your opinion, which is better, XML or JSON? Why is JSON more popular than XML?
+> I believe that JSON is better than XML for me because it's easier to read compared to XML. I think JSON is more popular than XML because it works well with JavaScript and since a lot of platform use JavaScript now, JSON is more prefered. 
+
+3. What is the purpose of the is_valid() method in Django forms, and why do we need it?
+> I believe that is_valid() is used to check if the form has been submitted with the data, then each field is also checked so that it matches the requirement (for example it must have the right data type). Then, if everything works fine, Django creates a place for clean data in form.cleaned_data. If it fails, it will store error message in form.errors.
+
+4. Why do we need a csrf_token when making forms in Django? What can happen if we don't include a csrf_token in a Django form? How can this be exploited by an attacker?
+> csrf_token is needed so that it ensures the form submission is really from our website and not a malicious or dangerous third party website. If we dont use a csrf_token, our site will be vulnerable to CSRF attacks. This can be exploited by an attacker by tricking the users to do something they doesnt intend, like changing the user's password.
+
+5. Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+
+a. Add 4 new views functions to view the added objects in XML, JSON, XML by ID, and JSON by ID formats.
+> First of all, I do this by adding HttpResponse and Serializer to views.py. Then, I made the 4 views function show_xml, show_json, show_xml_by_id, and show_json_by_id by using HttpResponse to return a response. Then, I add those functions in urls.py by using from main-views import (the functions) and add it into the path url.
+
+b. Create URL routings for each of the views added in point 1.
+> I do this by opening urls.py, then using from main-views import (the functions) and add it into the path url. The form of path url should be something like path('json/', show_json, name='show_json').
+
+c. Create a webpage to display the model object data with an "Add" button that redirects to the form page, and a "Detail" button on each model object data that displays the object's detail page.
+> To do this, I made a main.html file at the main/templates, then I made a new button called Add Product where it is linked to the create_product.html so that it will redirect to the form page. Then I made a if else function. If there is no product list (its empty), then it will return a message. If there is a product, then it will show the products alongside it properties. I also add a "Detail" button where the user will get redirected to the product_detail.html page .
+
+d. Create a form page to add model objects to the previous app.
+> Im using the create_product.html file for this, in the file I use the models from assignment 1, then I also link it to base.html. Then, I linked it to urls.py so that it can be imported to the path url.
+
+e. Create a webpage that displays the details of each model object data.
+> Im using the product_detail.html page for this, in the file I use the models I created from assignment 1 before, such as name, description, etc. Then link it with the main.html page. Then, I linked it to urls.py so that it can be imported to the path url.
+
+6.  Do you have any feedback for the teaching assistants for Tutorial 2?
+> I think the many typos made it harder/longer for the debugging kak. But other than that, I think it's good. The TAs is very helpful to help fix the bugs and teach us how to read the bugs :D
