@@ -100,3 +100,44 @@ e. Create a webpage that displays the details of each model object data.
 
 7. Access the four URLs in point 2 using Postman, take screenshots of the URL access results in Postman, and add them to your README.md
 > https://drive.google.com/drive/folders/1xcZHH48Btw6ELFNUVkmNJ6viT7iGQvF0?usp=sharing 
+
+--------------------------------------------------
+Assignment 4 : Implementing Authentication, Session, and Cookies in Django
+
+1. What is Django's AuthenticationForm? Explain its advantages and disadvantages.
+> Django's AuthenticationForm handle user login functionality. It is located in django.contrib.auth.forms and we can use it for authenticating users. The uses for it are to validates username/email and password combinations, checks if the user exists and credentials are correct, and it also handles authentication logic automatically.
+
+> Some of the advantages: 
+> It's secure and reliable, includes CSRF protection, easy to implement since we don't need to write custom validation logic, standard form rendering in termplates, etc.
+
+> Some of the disadvantages:
+> It has basic features only, like there is no custom user field support like phone number, fixed field structure (username/password only), no multi-factor authentication support, etc.
+
+2. What is the difference between authentication and authorization? How does Django implement the two concepts?
+> Authentication is is the process of verifying who you are to login, meanwhile authorization is the process of verifying that you have access to something. For example authentication is logging into your email account with credentials. Meanwhile authorization example is that admin can delete posts while regular users can only edit their own post. Authentication happens only once (at login) and maintains state, while authorization happens multiple times (everytime a protected resource is accessed) and it checks current permissions. 
+
+> In Django, it implements authentication using a layered system, it has User Model (user credentials and profile data in the database), Authentication Backends (it handle the actual credential verification process like password hashing, database lookups), Sessions Framework (it maintains user login state across HTTP requests using session cookies), Middleware (it automatically attaches the current user to every request), and also it has Built-in Views/Forms that has login/logout functionality we can use right away.
+
+> Meanwhile for authorization, Django does it through a permission-based system, it has Permission Model (stores individual permissions), Groups System (it allows grouping permissions together for easier management), User-Permission Relationships (links users to permissions), Decorators/Mixins (it provide easy ways to check permissions before executing view logic), and lastly Template Tags (which enable permission checking within templates).
+
+3. What are the benefits and drawbacks of using sessions and cookies in storing the state of a web application?
+> Sessions's benefits: Sensitive data stays on the server, only session ID is sent to client so it's more secure. It can store large amounts of data without size limitations. It has built-in timeout mechanisms for better security.
+> Session's drawbacks: Consumes server memory/storage, so it's more expensive in resources. If session store fails, all user states are lost. It also has load balancing complexity (since it will use shared storage across servers).
+> Cookies' benefits: No server storage. Can survive server restarts and browser sessions. Faster access since data is local
+> Cookies' drawbacks: Maximum 4KB per cookie, 20-50 cookies per domain (size is limited). Security risk is higher. Sent with every HTTP request, increasing payload.
+
+4. In web development, is the usage of cookies secure by default, or is there any potential risk that we should be aware of? How does Django handle this problem?
+> No, cookies are not secure by default since it can have cybersecurity attacks such as XSS, hijacking, cookie tampering, etc. Django tries to handle this problem though, one of them is by using CSRF protection. It includes CSRF tokens in forms by default, then it validates tokens on POST requests. It also uses double-submit cookie pattern. The web creator can edit the security settings to increase or decrease the security used for the website.
+
+5. Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+a. Implementing register, login, and logout functions that allow user to access the application based on their login/logout status.
+> To do this, I just open views.py and import the modules that I need, then I put the functions that I need for register, login, and logout in views.py. I made a new html file in the templates for the website, connect the routing to urls,py and path url. This is also the same for login and logout, since I also made a html then do the routing to urls.py and path url.
+
+b. Create two (2) user accounts each having three (3) dummy datas of the models that was previously made for each account in local.
+> For this, I simply open the website then create 2 user accounts with the name and password that I wanted, then I made 3 dummy datas which are the products in the website for each account (so the total is 6 products). I got the information for the products through google pictures.
+
+c. Connect the Product model with the User model.
+> To do this, I open the models.py then import User from django.contrib.auth.models. Then I add the user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) in my Product class which connects one product to the user. Then I do makemigration and migrate. Then I open views.py and modify the functions that I used (create_product and show_main) to add the user field there. 
+
+d. Show the logged in user's detailed information such as username, as well as implement cookies such as last_login on the application's home page.
+> To do this, I added the last_login to if form.is_valid and using the import datetime to get the current date and time when I logged in. Then I use cookies in request to get the last_login key. Also, I edited the logout_user to delete the last_login cookie after logging out, so that it will be updated. Then I edit the html file so that it shows the information in the website.
