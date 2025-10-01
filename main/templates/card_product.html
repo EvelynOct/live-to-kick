@@ -46,13 +46,13 @@
       </a>
     </h3>
 
-    <p class="text-gray-300 text-sm leading-relaxed line-clamp-3 mb-2">
+    <p class="text-gray-300 text-sm leading-relaxed line-clamp-3 mb-3">
       {{ product.content|truncatewords:20 }}
     </p>
 
     <!-- Action Buttons -->
     {% if user.is_authenticated and product.user == user %}
-      <div class="flex items-center justify-between pt-3 border-t border-gray-700">
+      <div class="flex items-center justify-between">
         <a href="{% url 'main:show_product' product.id %}" class="text-teal-400 hover:text-teal-300 font-medium text-sm transition-colors">
           Read more
         </a>
@@ -66,7 +66,7 @@
         </div>
       </div>
     {% else %}
-      <div class="pt-3 border-t border-gray-700">
+      <div>
         <a href="{% url 'main:show_product' product.id %}" class="text-teal-400 hover:text-teal-300 font-medium text-sm transition-colors">
           Read more →
         </a>
