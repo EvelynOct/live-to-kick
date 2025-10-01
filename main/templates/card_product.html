@@ -8,15 +8,23 @@
       <div class="w-full h-full bg-gray-700"></div>
     {% endif %}
 
+    <!-- Top overlay: Date + Views -->
+    <div class="absolute top-3 inset-x-3 flex justify-between text-xs text-white/90 bg-black/40 px-3 py-1 rounded-lg backdrop-blur-sm">
+      <time datetime="{{ product.created_at|date:'c' }}">
+        {{ product.created_at|date:"M j, Y" }}
+      </time>
+      <span>{{ product.product_views }} views</span>
+    </div>
+
     <!-- Category Badge -->
-    <div class="absolute top-3 left-3">
+    <div class="absolute bottom-3 left-3">
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-teal-500 text-white shadow">
         {{ product.get_category_display }}
       </span>
     </div>
 
     <!-- Status Badges -->
-    <div class="absolute top-3 right-3 flex space-x-2">
+    <div class="absolute bottom-3 right-3 flex space-x-2">
       {% if product.is_featured %}
         <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-purple-200 text-purple-900">
           Featured
@@ -32,14 +40,6 @@
 
   <!-- Content -->
   <div class="p-5">
-    <div class="flex items-center text-sm text-gray-400 mb-3">
-      <time datetime="{{ product.created_at|date:'c' }}">
-        {{ product.created_at|date:"M j, Y" }}
-      </time>
-      <span class="mx-2">•</span>
-      <span>{{ product.product_views }} views</span>
-    </div>
-
     <h3 class="text-lg font-semibold text-white mb-3 line-clamp-2 leading-tight">
       <a href="{% url 'main:show_product' product.id %}" class="hover:text-teal-400 transition-colors">
         {{ product.title }}
