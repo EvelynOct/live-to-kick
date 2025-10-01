@@ -141,3 +141,59 @@ c. Connect the Product model with the User model.
 
 d. Show the logged in user's detailed information such as username, as well as implement cookies such as last_login on the application's home page.
 > To do this, I added the last_login to if form.is_valid and using the import datetime to get the current date and time when I logged in. Then I use cookies in request to get the last_login key. Also, I edited the logout_user to delete the last_login cookie after logging out, so that it will be updated. Then I edit the html file so that it shows the information in the website.
+
+--------------------------------------------------
+Assignment 5 : Web Design using HTML, CSS and CSS Framework
+
+1. CSS Selector Priority: If multiple CSS selectors target an HTML element, explain the priority order for CSS selector selection
+
+It is based off the priorities (highest order wins):
+    1. Origin & Importance (Author > User > User agent)
+    2. Selector Specificity (Inline styles (anything inside a style tag) > ID selectors > Classes selector > Element selector)
+    3. Order of Appearance
+    4. Initial & Inherited Properties
+
+2. Responsive Design:
+
+a. Why is responsive design important in web application development?
+Responsive design ensures that a website or web application adapts to different screen sizes and devices, it improves user experience, makes the app usable across devices, cost efficient.
+
+b. Provide examples of applications that have and haven't implemented responsive design
+Have implemented: applications like twitter or instagram can be used on mobile website and pc/laptop website
+Haven't implemented: old websites like old university websites that hasnt implemented it
+
+c. Explain the reasons behind your examples
+Twitter or instagram focuses on modern web practices and mobile-first design because they need to keep users engaged, so user response is very needed. Meanwhile for old websites that barely need any user responses like old university websites doesn't really need user responses, so a lot of them doesn't update their website to include one.
+
+3. Box Model: Explain the differences between margin, border, and padding, and how to implement them
+
+Margin: The space outside the border of an element, this doesn't have a background color, and it's used to create spacing between elements.
+
+Border: The line between margin and padding around the element, it outlines the element and can have style, color, and thickness. It's used to highlight or visually separate elements.
+
+Padding: The space between the content and the border. It pushes the content inward, increasing space inside the element. Can have background colors. It's used to add spacing around text/images inside a box.
+
+4. Layout Systems: Explain the concepts of flexbox and grid layout along with their uses
+
+Flexbox: one dimensional, great for smaller UI elements (like either a single row or column). Works from a flex container (display: flex) that controls flex items inside it. One of the uses is for navigation bars.
+Grid: two dimensional, perfect for full layouts with both rows and columns. Works with a grid container (display: grid) and grid items placed in defined cells. Few of the uses is for full page layouts, photo galleries, etc.
+
+5. Implementation Steps: Explain how you implemented the above checklist step-by-step (not just following the tutorial)
+
+a. Implement functions to delete and edit products
+I use tailwind for the customizations. First of all, add tailwind in base.html so that it will connect to the django. Then in the views.py I added edit_product function so we can edit the products. I also added a delete product function there. Then I made a new html file edit_product.html so the user can edit the product at that page. Also editing the main.html so that it uses the delete button so user can delete. Then I made the routing to urls.py and urlpatterns so that the page is connected to the html and the functions that we created.
+
+e. Navigation Bar (this first before the others)
+I made a new html file called navbar.html then I linked it to the main.html. Then I added global.css so I can style it with tailwind (after changing settings.py to static). Then I added custom styling then I style my navigation bar.
+
+b. Page Customization
+I styled the login page, register page, add product page, edit product page, and product detail page by changing the each respective html that the page uses to use form-style, colors, center allignment, etc.
+
+c. Product List Page
+I styled the product list page so that when there is no product, it will show a text that says that there is no product there. We do this by modifying the main.html, and also added the card_products to the main.html so that the users will see each products using the product cards (so that it'll look more neat)
+
+d. Product Cards
+I styled the product cards by making a new card_product.html then I edited the main.html to include the card_product.html. Then on the html I edited it from the one in the tutorial so that the views count and creation date appears on the top, and removed one of the margin so that it looks more clean. Also I replaced the color to appear darker. It's also connected with the edit button and delete button by referencing the url html from edit and delete to the card_product.html.
+
+
+
