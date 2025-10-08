@@ -195,5 +195,31 @@ I styled the product list page so that when there is no product, it will show a 
 d. Product Cards
 I styled the product cards by making a new card_product.html then I edited the main.html to include the card_product.html. Then on the html I edited it from the one in the tutorial so that the views count and creation date appears on the top, and removed one of the margin so that it looks more clean. Also I replaced the color to appear darker. It's also connected with the edit button and delete button by referencing the url html from edit and delete to the card_product.html.
 
+-------------------------------------------------------------------------------------------------
+Assignment 6:
 
+1. What is the difference between synchronous and asynchronous request?
+A synchronous request is blocking. When your browser sends a synchronous request, it freezes and waits for the server's response before you can do anything else. It's like being on a phone call where you can't do anything else until the call is over. An asynchronous request is non-blocking. Your browser sends the request in the background and continues to work. You can keep interacting with the page while waiting for the server's response. It's like sending a text message; you can go about your day and will be notified when a reply comes in.
+
+
+2. How does AJAX work in Django (request–response flow)?
+AJAX (Asynchronous JavaScript and XML) allows a web page to communicate with a server without reloading the entire page. Basically:
+Trigger: An event on the webpage (like a button click) triggers a JavaScript function.
+Request: The JavaScript function creates and sends an asynchronous HTTP request (using fetch() or XMLHttpRequest) to a specific URL in your Django project.
+Django View: A dedicated Django view function handles this incoming request. It processes the data, interacts with the database, and prepares a response.
+Response: Instead of rendering a full HTML template, the view typically returns data in a lightweight format like JSON using Django's JsonResponse.
+Update: The JavaScript on the client-side receives the JSON data and uses it to dynamically update a specific part of the page's HTML (the DOM) without a full page refresh.
+
+3. What are the advantages of using AJAX compared to regular rendering in Django?
+Improved User Experience: The page doesn't go blank and reload for every small interaction, making the website feel faster, smoother, and more like a desktop application.
+Reduced Server Load: Only small amounts of data (like JSON) are transferred instead of entire HTML pages, which reduces the processing load on the server.
+More Responsiveness: Users get instant feedback for their actions (seeing a "like" count increase immediately) because the updates happen in the background.
+
+4. How do you ensure security when using AJAX for Login and Register features in Django?
+Some of them are:
+CSRF Protection: Django's built-in Cross-Site Request Forgery protection works with AJAX. You must include the CSRF token in the headers of your AJAX request.
+Using HTTPS: Always serve your login and registration pages over HTTPS (SSL/TLS) to encrypt the username and password data being sent between the client and server.
+
+5. How does AJAX affect user experience (UX) on websites?
+AJAX enhances user experience by making websites feel more dynamic, responsive, and interactive. It eliminates the "stop-and-wait" experience of full page reloads. Actions like submitting comments, voting on a post, or adding an item to a cart happen instantly without interrupting the user's flow. It also has real time update.
 
