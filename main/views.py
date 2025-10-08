@@ -48,8 +48,8 @@ def show_json(request):
     data = [
         {
             'id': str(product.id),
-            'title': product.name,
-            'content': product.description,
+            'name': product.name,
+            'description': product.description,
             'category': product.category,
             'thumbnail': product.thumbnail,
             'product_views': product.product_views,
@@ -75,8 +75,8 @@ def show_json_by_id(request, product_id):
         product = Product.objects.select_related('user').get(pk=product_id)
         data = {
             'id': str(product.id),
-            'title': product.name,
-            'content': product.description,
+            'name': product.name,
+            'description': product.description,
             'category': product.category,
             'thumbnail': product.thumbnail,
             'product_views': product.product_views,
