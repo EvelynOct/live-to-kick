@@ -57,17 +57,12 @@
           Read more
         </a>
         <div class="flex space-x-3">
-        <button 
-          onclick="showEditModal({{ product.id }})" 
-          class="text-gray-400 hover:text-gray-200 text-sm transition-colors">
+          <button onclick="showEditModal({{ product.id }}, '{{ product.name|escapejs }}', '{{ product.description|escapejs }}')" class="text-gray-400 hover:text-gray-200 text-sm transition-colors">
             Edit
-        </button>
-        <button 
-          onclick="showDeleteModal({{ product.id }})" 
-          class="text-red-500 hover:text-red-400 text-sm transition-colors">
+          </button>
+          <button onclick="showDeleteModal({{ product.id }})" class="text-red-500 hover:text-red-400 text-sm transition-colors">
             Delete
-        </button>
-
+          </button>
         </div>
       </div>
     {% else %}
@@ -123,23 +118,17 @@ function hideDeleteModal() {
 
 document.getElementById("confirmDeleteBtn").addEventListener("click", function() {
   if (currentProductId) {
-    // Redirect to Django delete URL (or handle with AJAX)
     window.location.href = `/delete-product/${currentProductId}/`;
   }
 });
 
 // --- EDIT ---
-function showEditModal(productId) {
+function showEditModal(productId, name, description) {
   currentProductId = productId;
   document.getElementById("editModal").classList.remove("hidden");
-
-  // You can fetch existing data via AJAX if you want:
-  // fetch(`/api/products/${productId}/`)
-  //   .then(r => r.json())
-  //   .then(data => {
-  //     document.getElementById("editProductName").value = data.name;
-  //     document.getElementById("editProductDescription").value = data.description;
-  //   });
+  document.getElementById("editProductId").value = productId;
+  document.getElementById("editProductName").value = name;
+  document.getElementById("editProductDescription").value = description;
 }
 
 function hideEditModal() {
@@ -148,7 +137,11 @@ function hideEditModal() {
 
 document.getElementById("editProductForm").addEventListener("submit", function(e) {
   e.preventDefault();
-  // Handle via AJAX or redirect
-  alert(`Edited product ${currentProductId} with new data!`);
+  const name = document.getElementById("editProductName").value;
+  const desc = document.getElementById("editProductDescription").value;
+
+  alert(`Edited product ${currentProductId}\nName: ${name}\nDescription: ${desc}`);
+
+  hideEditModal();
 });
 </script>
