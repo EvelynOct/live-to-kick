@@ -23,20 +23,27 @@ def logout_user(request):
     return response
 
 def login_user(request):
-   if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
+    form = AuthenticationForm()
 
-      if form.is_valid():
-        user = form.get_user()
-        login(request, user)
-        response = HttpResponseRedirect(reverse("main:show_main"))
-        response.set_cookie('last_login', str(datetime.datetime.now()))
-        return response
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
 
-   else:
-      form = AuthenticationForm(request)
-   context = {'form': form}
-   return render(request, 'login.html', context)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    "status": "success",
+                    "message": "Login successful! Redirecting..."
+                })
+            response = HttpResponseRedirect(reverse("main:show_main"))
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({"status": "error", "errors": form.errors}, status=400)
+    return render(request, "main/login.html", {"form": form})
 
 def show_xml(request):
      product_list = Product.objects.all()

@@ -13,32 +13,9 @@
         <p class="text-gray-600">Welcome back to Live to Kick</p>
       </div>
 
-      <!-- Form Errors Display -->
-      {% if form.non_field_errors %}
-        <div class="mb-6">
-          {% for error in form.non_field_errors %}
-            <div class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700">
-              {{ error }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
+      <div id="message-container" class="mb-6"></div>
 
-      {% if form.errors %}
-        <div class="mb-6">
-          {% for field, errors in form.errors.items %}
-            {% if field != '__all__' %}
-              {% for error in errors %}
-                <div class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700 mb-2">
-                  <strong>{{ field|title }}:</strong> {{ error }}
-                </div>
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <form method="POST" action="" class="space-y-6">
+      <form id="login-form" method="POST" class="space-y-6">
         {% csrf_token %}
         
         <div>
@@ -65,36 +42,15 @@
 
         <button 
           type="submit" 
-          class="w-full bg-green-600 text-white font-medium py-3 px-4 rounded-md hover:bg-green-700 transition-colors" onclick='return confirm("Lets login?")'>
+          class="w-full bg-green-600 text-white font-medium py-3 px-4 rounded-md hover:bg-green-700 transition-colors">
           Sign In
         </button>
       </form>
 
-      <!-- Messages Display -->
-      {% if messages %}
-        <div class="mt-6">
-          {% for message in messages %}
-            <div 
-              class="
-                px-4 py-3 rounded-md text-sm border
-                {% if message.tags == 'success' %}
-                  bg-green-50 border-green-200 text-green-700
-                {% elif message.tags == 'error' %}
-                  bg-red-50 border-red-200 text-red-700
-                {% else %}
-                  bg-gray-50 border-gray-200 text-gray-700
-                {% endif %}
-              ">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-
       <div class="mt-6 text-center pt-6 border-t border-gray-200">
         <p class="text-gray-500 text-sm">
           Don't have an account? 
-          <a href="{% url 'main:register' %}" class="text-green-600 hover:text-green-700 font-medium" onclick='return confirm("Lets create a new account?")'>
+          <a href="{% url 'main:register' %}" class="text-green-600 hover:text-green-700 font-medium">
             Register Now
           </a>
         </p>
@@ -102,4 +58,62 @@
     </div>
   </div>
 </div>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', async function(e) {
+    // 1. Prevent the default form submission (which causes a page reload)
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    const messageContainer = document.getElementById('message-container');
+    
+    // Clear previous messages
+    messageContainer.innerHTML = ''; 
+    
+    try {
+        // 2. Send the data to your AJAX view using the Fetch API
+        const response = await fetch("{% url 'main:login_ajax' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': data.csrfmiddlewaretoken, // Important for security!
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        // 3. Handle the JSON response from the server
+        if (response.ok) { // Status code is 200-299
+            // SUCCESS!
+            messageContainer.innerHTML = `
+                <div class="px-4 py-3 rounded-md text-sm border bg-green-50 border-green-200 text-green-700">
+                    ${result.message}
+                </div>`;
+            
+            // Redirect to another page after a short delay
+            setTimeout(() => {
+                window.location.href = "/"; // Redirect to the homepage or dashboard
+            }, 1500); 
+
+        } else {
+            // ERROR! (e.g., wrong password)
+            messageContainer.innerHTML = `
+                <div class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700">
+                    ${result.message}
+                </div>`;
+        }
+    } catch (error) {
+        // Handle network errors or other unexpected issues
+        console.error('Submission failed:', error);
+        messageContainer.innerHTML = `
+            <div class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700">
+                An unexpected error occurred. Please try again.
+            </div>`;
+    }
+});
+</script>
+
 {% endblock content %}
