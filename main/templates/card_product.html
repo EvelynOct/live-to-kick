@@ -60,9 +60,11 @@
           <button onclick="showEditModal({{ product.id }}, '{{ product.name|escapejs }}', '{{ product.description|escapejs }}')" class="text-gray-400 hover:text-gray-200 text-sm transition-colors">
             Edit
           </button>
+
           <button onclick="showDeleteModal({{ product.id }})" class="text-red-500 hover:text-red-400 text-sm transition-colors">
             Delete
           </button>
+
         </div>
       </div>
     {% else %}
