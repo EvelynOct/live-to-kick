@@ -40,22 +40,22 @@
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
       </svg>
-      <p class="text-gray-600 mt-3">Loading products...</p>
+      <p class="text-gray-600 mt-3">Loading product...</p>
     </div>
 
     <!-- Error State -->
     <div id="error" class="hidden"></div>
 
-    <!-- Products Grid -->
+    <!-- Product Grid -->
     <div id="grid" class="hidden"></div>
 
     <!-- Empty State -->
     <div id="empty" class="bg-white rounded-lg border border-gray-200 p-12 text-center hidden">
       <div class="w-32 h-32 mx-auto mb-4">
-        <img src="{% static 'image/no-products.png' %}" alt="No products available" class="w-full h-full object-contain">
+        <img src="{% static 'image/no-product.png' %}" alt="No product available" class="w-full h-full object-contain">
       </div>
-      <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-      <p class="text-gray-500 mb-6">Be the first to share products with the community.</p>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">No product found</h3>
+      <p class="text-gray-500 mb-6">Be the first to share product.</p>
       <a href="{% url 'main:create_product' %}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
         Create Product
       </a>
@@ -72,24 +72,24 @@ const CURRENT_USER_ID = "{{ user.id|default_if_none:'' }}";
 const loadingSpinner = document.getElementById('loading');
 const errorMessage = document.getElementById('error');
 const emptyStateDisplay = document.getElementById('empty');
-const productsGridContainer = document.getElementById('grid');
-const showAllProductsButton = document.getElementById('filter-all');
-const showMyProductsButton = document.getElementById('filter-my');
+const productGridContainer = document.getElementById('grid');
+const showAllProductButton = document.getElementById('filter-all');
+const showMyProductButton = document.getElementById('filter-my');
 
 // State Variables
 let activeFilter = 'all';
-let allProductsData = [];
+let allProductData = [];
 
 // Update filter button appearance
 function updateFilterButtonsAppearance() {
-  if (!showAllProductsButton || !showMyProductsButton) return;
+  if (!showAllProductButton || !showMyProductButton) return;
 
   if (activeFilter === 'all') {
-    showAllProductsButton.className = 'bg-green-600 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700';
-    showMyProductsButton.className = 'bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-600 hover:text-white';
+    showAllProductButton.className = 'bg-green-600 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700';
+    showMyProductButton.className = 'bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-600 hover:text-white';
   } else {
-    showMyProductsButton.className = 'bg-green-600 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700';
-    showAllProductsButton.className = 'bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-600 hover:text-white';
+    showMyProductButton.className = 'bg-green-600 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700';
+    showAllProductButton.className = 'bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-600 hover:text-white';
   }
 }
 
@@ -98,11 +98,11 @@ function displayPageSection({ showLoading = false, showError = false, showEmpty 
   loadingSpinner.classList.toggle('hidden', !showLoading);
   errorMessage.classList.toggle('hidden', !showError);
   emptyStateDisplay.classList.toggle('hidden', !showEmpty);
-  productsGridContainer.classList.toggle('hidden', !showGrid);
+  productGridContainer.classList.toggle('hidden', !showGrid);
   
   // Add grid classes when showing grid
   if (showGrid) {
-    productsGridContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+    productGridContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
   }
 }
 
@@ -119,7 +119,7 @@ function getReadableCategoryName(categoryCode) {
   return categoryMapping[categoryCode] || categoryCode;
 }
 
-// Create new products card element
+// Create product card element
 function buildProductCardElement(item) {
     const article = document.createElement('article');
     article.className = 'bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full';
@@ -189,35 +189,35 @@ function buildProductCardElement(item) {
 
 // Render all product cards
 function renderAllProductCards(productItems) {
-  productsGridContainer.innerHTML = '';
+  productGridContainer.innerHTML = '';
   productItems.forEach(productItem => {
     const cardElement = buildProductCardElement(productItem);
-    productsGridContainer.appendChild(cardElement);
+    productGridContainer.appendChild(cardElement);
   });
 }
 
 // Filter and display products
-function filterAndDisplayProducts() {
+function filterAndDisplayProduct() {
   updateFilterButtonsAppearance();
 
-  const filteredProducts = activeFilter === 'all'
-    ? allProductsData
-    : allProductsData.filter(product => Number(product.user_id) === Number(CURRENT_USER_ID));
+  const filteredProduct = activeFilter === 'all'
+    ? allProductData
+    : allProductData.filter(product => Number(product.user_id) === Number(CURRENT_USER_ID));
 
-  if (filteredProducts.length === 0) {
+  if (filteredProduct.length === 0) {
     displayPageSection({ showEmpty: true });
   } else {
-    renderAllProductCards(filteredProducts);
+    renderAllProductCards(filteredProduct);
     displayPageSection({ showGrid: true });
   }
 }
 
 // Fetch product data from server
-async function fetchProductsFromServer() {
+async function fetchProductFromServer() {
   try {
     displayPageSection({ showLoading: true });
 
-    const response = await fetch(PRODUCTS_API_ENDPOINT, {
+    const response = await fetch(PRODUCT_API_ENDPOINT, {
       headers: { 'Accept': 'application/json' },
     });
 
@@ -225,42 +225,42 @@ async function fetchProductsFromServer() {
       throw new Error('Failed to fetch product data from server');
     }
 
-    const productsData = await response.json();
-    allProductsData = productsData || [];
+    const productData = await response.json();
+    allProductData = productData || [];
 
-    filterAndDisplayProducts();
+    filterAndDisplayProduct();
   } catch (error) {
-    console.error('Error loading products:', error);
+    console.error('Error loading product:', error);
     displayPageSection({ showError: true });
   }
 }
 
 // Event handlers
-function handleShowAllProductsClick() {
+function handleShowAllProductClick() {
   activeFilter = 'all';
-  filterAndDisplayProducts();
+  filterAndDisplayProduct();
 }
 
-function handleShowMyProductsClick() {
+function handleShowMyProductClick() {
   activeFilter = 'my';
-  filterAndDisplayProducts();
+  filterAndDisplayProduct();
 }
 
 // Initialize page
-function initializeProductsPage() {
-  showAllProductsButton.addEventListener('click', handleShowAllProductsClick);
-  showMyProductsButton.addEventListener('click', handleShowMyProductsClick);
+function initializeProductPage() {
+  showAllProductButton.addEventListener('click', handleShowAllProductClick);
+  showMyProductButton.addEventListener('click', handleShowMyProductClick);
 
-  fetchProductsFromServer();
+  fetchProductFromServer();
 }
 
 // Start application
-initializeProductsPage();
+initializeProductPage();
 
 // Add event listener to detect new products
-document.addEventListener('productsAdded', function() {
+document.addEventListener('productAdded', function() {
     // Refresh data without page reload
-    fetchProductsFromServer();
+    fetchProductFromServer();
 });
 
 </script>
