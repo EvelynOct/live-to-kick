@@ -12,7 +12,7 @@
           <a href="/" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
             Home
           </a>
-          <a href="{% url 'main:create_product' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+          <a href="{% url 'main:create_product' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors" onclick='return confirm("Lets create a new product?")'>
             Create Product
           </a>
         </div>
@@ -24,14 +24,14 @@
               <div class="text-sm font-medium text-gray-900">{{ name|default:user.username }}</div>
               <div class="text-xs text-gray-500">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
             </div>
-            <a href="{% url 'main:logout' %}" class="text-red-600 hover:text-red-700 font-medium transition-colors">
+            <a href="{% url 'main:logout' %}" class="text-red-600 hover:text-red-700 font-medium transition-colors" onclick='return confirm("Lets logout?")'>
               Logout
             </a>
           {% else %}
-            <a href="{% url 'main:login' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            <a href="{% url 'main:login' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors" onclick='return confirm("Lets login?")'>
               Login
             </a>
-            <a href="{% url 'main:register' %}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium transition-colors">
+            <a href="{% url 'main:register' %}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium transition-colors" onclick='return confirm("Lets create a new account?")'>
               Register
             </a>
           {% endif %}
